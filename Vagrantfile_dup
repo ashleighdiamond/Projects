@@ -1,0 +1,37 @@
+# Require the AWS provider plugin
+require 'vagrant-aws'
+
+# Require YAML module
+require 'yaml'
+
+# Read YAML file with box details
+cred = YAML.load_file(ENV['HOME'] + '/.ssh/api_cred.yml')
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "dummy"
+  config.vm.provision :shell, path: 'bootstrap.sh'
+
+  config.vm.provider 'virtualbox' do |vb, override|
+    override.vm.box= 'ubuntu/xenial64'
+  end
+
+  config.vm.provider 'aws' do |aws, override|
+  # Read AWS authentication information from environment variables
+  aws.access_key_id = cred['aws']['aws_access_key_id']
+  aws.secret_access_key = cred['aws']['aws_secret_access_key']
+
+  # Specify SSH keypair to use
+  aws.keypair_name = 'DiamondAshleigh'
+
+  # Specify region, AMI ID, and security group(s)
+  aws.instance_type = 't2.micro'
+  aws.region = 'us-east-1'
+  aws.ami = 'ami-f4cc1de2'
+  aws.security_groups = ['launch-wizard-1']
+
+  # Specify username and private key path
+  override.ssh.username = 'ubuntu'
+  override.ssh.private_key_path = '~/.ssh/DiamondAshleigh.pem'
+  end
+end

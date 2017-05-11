@@ -1,0 +1,24 @@
+SELECT Count(transactions) , meters.paidarea, sum(amount),
+From transactions, meters
+WHERE transactions.metercode = meters.pandd_nbr
+Group By  meters.paidarea
+
+"How to get the total amount per area during the time that I observed"
+
+SELECT COUNT(transactionid)
+FROM transactions
+
+"Get the total transaction count during my observation"
+
+SELECT tmonth, tday, SUM(amount)
+FROM transactions
+Where tday != 23 and tday != 30 and tday != 7
+GROUP BY tmonth, tday
+ORDER BY tmonth, tday
+
+"Get the average daily revenues not including Sunday for the time that I observed "
+
+SELECT SUM((amount))
+FROM transactions
+
+"Get the total revenue during the time that I observed"
