@@ -11,6 +11,7 @@ Area Observed:
 -23 Days of observations
 
 -713,093 transactions
+
 -Daily Revenues:
 
   -Min: $169.36
