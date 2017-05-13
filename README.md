@@ -7,11 +7,16 @@ Area Observed:
 #Background:
 
 -Metered Parking
+
 -23 Days of observations
+
 -713,093 transactions
 -Daily Revenues:
+
   -Min: $169.36
+  
   -Max: $137,854.72
+
 -$2.5 million total revenue observed
 
 #Why is pricing important?
